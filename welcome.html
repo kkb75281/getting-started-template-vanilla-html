@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="main.css" />
+        <title>Welcome</title>
+    </head>
+    <body>
+        <main>
+            <h1>Login Success</h1>
+            <p id="welcome_message">Loading...</p>
+            <pre id="user_info"></pre>
+            <button id="logoutBtn">Logout</button>
+        </main>
+
+        <!-- script -->
+        <script src="https://cdn.jsdelivr.net/npm/skapi-js@latest/dist/skapi.js"></script>
+        <script src="service.js"></script>
+        <script>
+            const welcomeMessage = document.getElementById("welcome_message");
+            const userInfo = document.getElementById("user_info");
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            skapi
+                .getProfile()
+                .then((profile) => {
+                    if (!profile) {
+                        window.location.href = "login.html";
+                        return;
+                    }
+
+                    welcomeMessage.textContent = `Welcome, ${
+                        profile.name || profile.email || profile.user_id
+                    }!`;
+
+                    userInfo.textContent = JSON.stringify(profile, null, 2);
+                })
+                .catch((err) => alert(err.message));
+
+            logoutBtn.addEventListener("click", async () => {
+                await skapi.logout();
+                window.location.href = "index.html";
+            });
+
+            skapi.getConnectionInfo().then((info) => {
+                console.log(info);
+                /*
+                {
+                    service_name: "Your Service Name",
+                    user_ip: "사용자 IP",
+                    user_agent: "브라우저 정보",
+                    user_location: "국가 코드",
+                    version: "x.x.x"
+                }
+                */
+            });
+        </script>
+    </body>
+</html>
