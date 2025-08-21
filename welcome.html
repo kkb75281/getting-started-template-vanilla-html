@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="main.css" />
+        <title>Getting-started</title>
+    </head>
+    <body>
+        <h1 id="welcome_message"></h1>
+        <!-- script -->
+        <script src="https://cdn.jsdelivr.net/npm/skapi-js@latest/dist/skapi.js"></script>
+        <script src="service.js"></script>
+        <script>
+            welcomeMessage = document.getElementById("welcome_message");
+            skapi
+                .getProfile()
+                .then((profile) => {
+                    console.log(profile);
+                    welcomeMessage.innerHTML = `Welcome, ${profile.name}.`;
+
+                    if (profile === null) {
+                        window.location.href = "login.html";
+                    }
+                })
+                .catch((err) => alert(err.message));
+
+            skapi.getConnectionInfo().then((info) => {
+                console.log(info);
+                /*
+                Returns:
+                {
+                    service_name: "Your Service Name",
+                    user_ip: "Connected user's IP address",
+                    user_agent: "Connected user agent",
+                    user_location: "Connected user's country code",
+                    version: 'x.x.x' // Skapi library version
+                }
+                */
+                // window.alert(`Connected to ${info.service_name}`);
+            });
+        </script>
+    </body>
+</html>
