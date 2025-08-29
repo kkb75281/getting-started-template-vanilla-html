@@ -32,8 +32,4 @@ The application will be hosted on port `3300`.
 
 Replace the `SERVICE_ID` and `OWNER_ID` values in `service.js` with your own service information.
 
-Currently, the service is running in **Trial Mode**.
-
-**All user data will be deleted every 14 days.**
-
 You can get your own service ID from [Skapi](https://www.skapi.com).
