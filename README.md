@@ -28,6 +28,10 @@ npm run dev
 
 The application will be hosted on port `3300`.
 
+## Live Demo
+
+You can check our live demo [Here](https://getting-started-template-vanilla.skapi.com/).
+
 ## Important!
 
 Replace the `SERVICE_ID` and `OWNER_ID` values in `service.js` with your own service information.
